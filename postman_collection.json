@@ -1,0 +1,102 @@
+{
+	"info": {
+		"name": "Todo API",
+		"description": "REST API for task management with filtering, search, sorting and pagination. Built with Django REST Framework.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000"
+		},
+		{
+			"key": "task_id",
+			"value": "1"
+		}
+	],
+	"item": [
+		{
+			"name": "Get all tasks",
+			"request": {
+				"method": "GET",
+				"url": "{{base_url}}/api/tasks/"
+			}
+		},
+		{
+			"name": "Create task",
+			"request": {
+				"method": "POST",
+				"url": "{{base_url}}/api/tasks/",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Buy milk\",\n    \"priority\": 3\n}"
+				}
+			}
+		},
+		{
+			"name": "Get single task",
+			"request": {
+				"method": "GET",
+				"url": "{{base_url}}/api/tasks/{{task_id}}/"
+			}
+		},
+		{
+			"name": "Update task",
+			"request": {
+				"method": "PUT",
+				"url": "{{base_url}}/api/tasks/{{task_id}}/",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Buy milk and bread\",\n    \"is_complete\": true,\n    \"priority\": 2\n}"
+				}
+			}
+		},
+		{
+			"name": "Delete task",
+			"request": {
+				"method": "DELETE",
+				"url": "{{base_url}}/api/tasks/{{task_id}}/"
+			}
+		},
+		{
+			"name": "Filter by completed",
+			"request": {
+				"method": "GET",
+				"url": "{{base_url}}/api/tasks/?is_complete=true"
+			}
+		},
+		{
+			"name": "Filter by priority",
+			"request": {
+				"method": "GET",
+				"url": "{{base_url}}/api/tasks/?priority=3"
+			}
+		},
+		{
+			"name": "Search tasks",
+			"request": {
+				"method": "GET",
+				"url": "{{base_url}}/api/tasks/?search=milk"
+			}
+		},
+		{
+			"name": "Sort by priority",
+			"request": {
+				"method": "GET",
+				"url": "{{base_url}}/api/tasks/?ordering=-priority"
+			}
+		}
+	]
+}
